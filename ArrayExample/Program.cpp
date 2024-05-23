@@ -61,6 +61,7 @@ int main()
 
 	//Операції над багатомірними масивами - Матриці
 	//Додавання та віднімання
+	/*
 	int A[n][m];
 	int B[n][m];
 	
@@ -107,6 +108,40 @@ int main()
 		for (int j = 0; j < m; j++)
 		{
 			cout << A[i][j] - B[i][j] << "\t";
+		}
+		cout << "\n";
+	} */
+	
+	int A[n][m] = { {3,5}, {2,8} };
+	cout << "----Matrix A---\n";
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < m; j++)
+		{
+			cout << A[i][j] << "\t";
+		}
+		cout << "\n";
+	}
+	int tA[n][m]; //траспонована
+
+	//3 2
+	//5 8
+	cout << "Транспонована до даної\n";
+	
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < m; j++)
+		{
+			tA[i][j] = A[j][i];
+		}
+	}
+
+	cout << "----Танспонована матриця A---\n";
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < m; j++)
+		{
+			cout << tA[i][j] << "\t";
 		}
 		cout << "\n";
 	}
