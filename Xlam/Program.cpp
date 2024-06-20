@@ -1,89 +1,47 @@
 #include <iostream>
 #include <Windows.h>
-
 using namespace std;
 
-#define n 2
-#define m 2
-
-int main()
-{
-    srand(time(NULL));
+int main() {
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
-    int begin = 2;
-    int end = 8;
+    const int n = 4, m = 4;
+    int begin = -5, end = 10;
 
     int A[n][m];
-    int B[n][m];
-    int C[n][m];
 
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < m; j++)
-        {
+    srand(time(0));
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
             A[i][j] = rand() % (end - begin + 1) + begin;
-            B[i][j] = rand() % (end - begin + 1) + begin;
         }
     }
 
-    cout << "----Matrix A-----\n";
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < m; j++)
-        {
+    cout << "____matrix A_____" << endl;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
             cout << A[i][j] << "\t";
         }
         cout << "\n";
     }
 
-    cout << "----Matrix B-----\n";
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < m; j++)
-        {
-            cout << B[i][j] << "\t";
-        }
-        cout << "\n";
-    }
-
-    cout << "----Matrix A + B-----\n";
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < m; j++)
-        {
-            cout << A[i][j] + B[i][j] << "\t";
-        }
-        cout << "\n";
-    }
-
-    cout << "----Matrix A - B-----\n";
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < m; j++)
-        {
-            cout << A[i][j] - B[i][j] << "\t";
-        }
-        cout << "\n";
-    }
-
-    cout << "----Matrix A * B-----\n";
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < m; j++)
-        {
-            C[i][j] = 0;
-            for (int k = 0; k < m; k++)
-            {
-                C[i][j] += A[i][k] * B[k][j];
+    for (int col = 0; col < m; col++) {
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (A[j][col] > A[j + 1][col]) {
+                    int change = A[j][col];
+                    A[j][col] = A[j + 1][col];
+                    A[j + 1][col] = change;
+                }
             }
         }
     }
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < m; j++)
-        {
-            cout << C[i][j] << "\t";
+
+    cout << "____Відсортована матриця_____" << endl;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            cout << A[i][j] << "\t";
         }
         cout << "\n";
     }
