@@ -4,26 +4,28 @@ using namespace std;
 
 //прототип функції
 void fillArray(int*, const int); //параметри функції називаються формальними
+char* inputStr(); //Ввід даних з клавіатури. Повертає вказівник на масив елементів рядка 
+int sizeStr(const char*);
 
 int main() {
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 	srand(time(0));
 
-	cout << "Як Вас звати?\n";
-	char str[80]; //максимально можна записать 80 символів, а точніше 79 + \0
-	cin.getline(str, '\n');
-	cout <<"Привіт " << str << "!\n";
-	cout << "Довжина рядка " << sizeof(str) << "\n";
+	cout << "Вкажіть ім'я?\n";
+	char* firstName = inputStr();
 
-	for (int i = 0; i < 80; i++)
-	{
-		if (str[i] == '\0')
-		{
-			cout << "Кінець рядка " << i<<"\n";
-		}
-	}
+	cout << "Вкажіть прізвище?\n";
+	char* lastName = inputStr();
 
+	cout << "Привіт " << lastName << " " << firstName << "!\n";
+	cout << "sizeof name " << sizeof firstName << "\n";
+
+
+	delete[] lastName;
+	delete[] firstName;
+	
+	/*
 	char* name = new char[5];
 	name[0] = 'В';
 	name[1] = 'о';
@@ -41,6 +43,7 @@ int main() {
 		first++;
 		item = *first;
 	}
+	*/
 	
 	//while()
 
@@ -59,6 +62,28 @@ int main() {
 	cout << "\n"; */
 	return 0;
 }
+
+char* inputStr() {
+	char str[80]; //максимально можна записать 80 символів, а точніше 79 + \0
+	cin.getline(str, '\n');
+	int size = 0;
+	for (int i = 0; i < 80; i++)
+	{
+		if (str[i] == '\0')
+		{
+			//cout << "Кінець рядка " << i << "\n";
+			size = i + 1;
+			break;
+		}
+	}
+	char* result = new char[size];
+	for (int i = 0; i < size; i++)
+	{
+		result[i] = str[i];
+	}
+	return result;
+}
+
 
 //Реалізація функції
 void fillArray(int * mas, const int n) { //параметри функції називаються фактичними
